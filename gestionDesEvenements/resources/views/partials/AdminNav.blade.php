@@ -18,7 +18,7 @@
                         <span class="icon">
                             <ion-icon name="logo-apple"></ion-icon>
                         </span>
-                        <span class="title">Brand Name</span>
+                        <span class="title">Evento</span>
                     </a>
                 </li>
                 <li>
@@ -60,14 +60,14 @@
                     
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <a href="#">
-                        <span class="icon">
-                            <ion-icon name="log-out-outline"></ion-icon>
-                        </span>
-                        <span class="title">Log Out</span>
-                    </a>
-                       
+                        <button type="submit">
+                            <span class="icon">
+                                <ion-icon name="log-out-outline"></ion-icon>
+                            </span>
+                            <span class="title">Log Out</span>
+                        </button>
                     </form>
+                    
                 </li>
             </ul>
         </div>

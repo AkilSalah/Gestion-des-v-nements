@@ -31,14 +31,15 @@ class AuthenticatedSessionController extends Controller
 
     if ($request->user()->role === 'Admin') {
         return redirect()->route('Admin'); 
-    } elseif ($request->user()->role === 'Organisateur') {
+    } elseif ($request->user()->role === 'Organisateur' && $request->user()->status === 'libre') {
         return redirect()->route('Organisateur');
-    } elseif ($request->user()->role === 'Client') {
+    } elseif ($request->user()->role === 'Client' && $request->user()->status === 'libre') {
         return redirect()->route('Client'); 
     }
+        Auth::logout(); 
+        return redirect()->route('login')->with('error', 'Vous n\'avez pas les autorisations nécessaires.');
 
-    return redirect()->intended(RouteServiceProvider::HOME);
-}
+    }
 
     /**
      * Destroy an authenticated session.

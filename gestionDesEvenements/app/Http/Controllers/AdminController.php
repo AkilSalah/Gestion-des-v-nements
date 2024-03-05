@@ -6,6 +6,7 @@ use App\Models\Categorie;
 use App\Models\Client;
 use App\Models\Event;
 use App\Models\Organisateur;
+use App\Models\User ;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -18,8 +19,25 @@ class AdminController extends Controller
         $events = Event::count();
         return view('Admin.dashboard', compact('clients', 'organisateur', 'categories', 'events'));
     }
+
     public function usersIndex(){
-        return view('Admin.utilisateurAdmin');
+    $utilisateurs = User::where('role', 'client')
+    ->orWhere('role', 'organisateur')
+    ->get();
+    return view('Admin.utilisateurAdmin', compact('utilisateurs'));
+    }
+
+    public function blockAccess(Request $request, $userId)
+    {
+        $user = User::findOrFail($userId);
+        $request->validate([
+            'status' => 'required',
+        ]);
+        $user->update([
+            'status' => $request->status,
+        ]);
+
+        return redirect()->back();
     }
 
    

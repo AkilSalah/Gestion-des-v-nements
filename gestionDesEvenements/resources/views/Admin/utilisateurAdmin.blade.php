@@ -20,71 +20,32 @@ Utilisateur access
             Role
           </th>
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-            Joined At
-          </th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
             Actions
           </th>
         </tr>
       </thead>
       <tbody class="bg-white divide-y divide-gray-200 whitespace-nowrap">
+        @foreach ($utilisateurs as $utilisateur)
         <tr>
           <td class="px-6 py-4 text-sm text-[#333]">
-            John Doe
+            {{$utilisateur->name}}
           </td>
           <td class="px-6 py-4 text-sm text-[#333]">
-            john@example.com
+            {{$utilisateur->email}}
           </td>
           <td class="px-6 py-4 text-sm text-[#333]">
-            Admin
+            {{$utilisateur->role}}
           </td>
           <td class="px-6 py-4 text-sm text-[#333]">
-            2022-05-15
-          </td>
-          <td class="px-6 py-4 text-sm text-[#333]">
-            <button class="text-blue-500 hover:text-blue-700 mr-4">Edit</button>
-            <button class="text-red-500 hover:text-red-700">Delete</button>
+            <form action="{{ route('admin.access', $utilisateur->id ) }}" method="POST">
+                @csrf
+                <button type="submit" name="status" value="bloque" class="text-red-500 hover:text-red-700 mr-4">Block</button>
+                <button type="submit" name="status" value="libre" class="text-blue-500 hover:text-blue-700">Deblock</button>
+            </form>
           </td>
         </tr>
-        <tr>
-          <td class="px-6 py-4 text-sm text-[#333]">
-            Jane Smith
-          </td>
-          <td class="px-6 py-4 text-sm text-[#333]">
-            jane@example.com
-          </td>
-          <td class="px-6 py-4 text-sm text-[#333]">
-            User
-          </td>
-          <td class="px-6 py-4 text-sm text-[#333]">
-            2022-07-20
-          </td>
-          <td class="px-6 py-4 text-sm text-[#333]">
-            <button class="text-blue-500 hover:text-blue-700 mr-4">Edit</button>
-            <button class="text-red-500 hover:text-red-700">Delete</button>
-          </td>
-        </tr>
-        <tr>
-          <td class="px-6 py-4 text-sm text-[#333]">
-            Alen doe
-          </td>
-          <td class="px-6 py-4 text-sm text-[#333]">
-            alen@example.com
-          </td>
-          <td class="px-6 py-4 text-sm text-[#333]">
-            User
-          </td>
-          <td class="px-6 py-4 text-sm text-[#333]">
-            2022-07-21
-          </td>
-          <td class="px-6 py-4 text-sm text-[#333]">
-            <button class="text-blue-500 hover:text-blue-700 mr-4">Edit</button>
-            <button class="text-red-500 hover:text-red-700">Delete</button>
-          </td>
-        </tr>
+        @endforeach
       </tbody>
     </table>
   </div>
-
-    
 @endsection

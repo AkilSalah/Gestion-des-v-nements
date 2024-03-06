@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\eventRequest;
 use App\Models\Categorie;
 use App\Models\Event;
 use App\Models\Organisateur;
@@ -18,7 +19,7 @@ class EventController extends Controller
     {
         $categories = Categorie::all();
         $events = Event::all();
-        return view('Organisateur.evenements', compact('categories','events') );
+        return view('Organisateur.evenements', compact('categories', 'events'));
     }
 
     /**
@@ -32,29 +33,29 @@ class EventController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-   
-    
+
+
     public function store(Request $request)
     {
         $id = Auth::user()->id;
         $idOrganisateur = Organisateur::where('idUser', $id)->first();
         $validatedData = $request->validate([
             'categorie' => 'required',
-            'image' => 'required', 
+            'image' => 'required',
             'title' => 'required',
-            'description' =>'required',
-            'date' =>'required',
-            'lieu' =>'required',
-            'nbPlaces' =>'required',
+            'description' => 'required',
+            'date' => 'required',
+            'lieu' => 'required',
+            'nbPlaces' => 'required',
         ]);
-    
+
         $imagePath = $request->file('image')->store('public/images/events');
-    
+
         $relativeImagePath = str_replace('public/', 'storage/', $imagePath);
-    
+
         Event::create([
             'organisateurId' => $idOrganisateur->id,
-            'categoryId' => $validatedData['categorie'], 
+            'categoryId' => $validatedData['categorie'],
             'title' => $validatedData['title'],
             'description' => $validatedData['description'],
             'date' => $validatedData['date'],
@@ -64,7 +65,7 @@ class EventController extends Controller
         ]);
         return redirect()->back();
     }
-    
+
 
     /**
      * Display the specified resource.
@@ -85,34 +86,32 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Event $event)
+    public function update(eventRequest $request, Event $event)
     {
-        $validatedData = $request->validate([
-            'categorie_edit' => 'required',
-            'image_edit' => 'nullable|image', 
-            'title_edit' => 'required',
-            'description_edit' =>'required',
-            'date_edit' =>'required',
-            'lieu_edit' =>'required',
-            'nbPlaces_edit' =>'required',
-        ]);
-    
+
+        $validateRequest = $request->validated();
         if ($request->hasFile('image_edit')) {
             $imagePath = $request->file('image_edit')->store('public/images/events');
             $relativeImagePath = str_replace('public/', 'storage/', $imagePath);
-            $validatedData['image_edit'] = $relativeImagePath;
+            $request['image_edit'] = $relativeImagePath;
         }
-    
-    
-        $event->update($validatedData);
-    
+        $event->update([
+            'title'=>$validateRequest["title_edit"],
+            'categoryId' => $validateRequest["categorie_edit" ],
+            'description'=>$validateRequest["description_edit"],
+            'lieu'=>$validateRequest["lieu_edit"],
+            'nbPlaces' => $validateRequest["nbPlaces_edit"],
+            'date' => $validateRequest["date_edit"],
+
+        ]);
+
         return redirect()->back();
     }
-    
 
-    
 
-    
+
+
+
     /**
      * Remove the specified resource from storage.
      */
@@ -120,6 +119,5 @@ class EventController extends Controller
     {
         $event->delete();
         return redirect()->back();
-
     }
 }

@@ -43,13 +43,16 @@ Route::delete('/organisateur/DeleteEvent/{event}', [EventController::class, 'des
 
 // ---------------------------------------------------------------------------------------------------------------------------------
 Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('Admin');
+Route::get('/admin/Evenement', [AdminController::class, 'eventIndex'])->name('Admin.events');
 Route::get('/admin/Utilisateurs', [AdminController::class, 'usersIndex'])->name('Admin.users');
 Route::get('/admin/Categories', [CategorieController::class, 'index'])->name('Admin.categorie');
 route::post('/admin/Categories', [CategorieController::class, 'store'])->name('insert.categories');
 route::put('/admin/Categories/{categorie} ', [CategorieController::class, 'update'])->name('update.categories');
 route::delete('/admin/Categories/{categorie}', [CategorieController::class, 'destroy'])->name('delete.categories');
 route::post('/admin/Utilisateurs/{user}',[AdminController::class,'blockAccess'])->name('admin.access');
-// ---------------------------------------------------------------------------------------------------------------------------------
+route::post('/admin/Evenement/{eventId}',[AdminController::class,'publication'])->name('admin.pub');
+
+// --------------------------------------------------------%-------------------------------------------------------------------------
 
 Route::get('/client/home', [ClientController::class, 'index'])->name('Client');
 

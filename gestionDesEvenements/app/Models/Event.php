@@ -15,7 +15,9 @@ class Event extends Model
         'date',
         'nbPlaces',
         'description',
-        'image',   
+        'image',  
+        'status', 
+        'acceptations'
     ];
 
     public function organisateur(){

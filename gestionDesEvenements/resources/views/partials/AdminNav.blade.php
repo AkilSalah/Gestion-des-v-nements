@@ -50,7 +50,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="{{ route('Admin.events') }}">
                         <span class="icon">
                             <ion-icon name="help-outline"></ion-icon>
                         </span>
@@ -62,14 +62,12 @@
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <a href="">
-                        <button type="submit">
-                            <a href="">
+                        <button class="flex" type="submit">
                              <span class="icon">
                                 <ion-icon name="log-out-outline"></ion-icon>
                             </span>
                             <span class="title">Log Out</span>   
                         </button>
-                    </a>
                     </form>
                     
                 </li>

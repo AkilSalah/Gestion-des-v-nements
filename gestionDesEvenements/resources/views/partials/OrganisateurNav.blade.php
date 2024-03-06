@@ -50,14 +50,12 @@
                 <li>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit">
-                            <a href="">
+                        <a href="">
+                        <button class="flex" type="submit">
                              <span class="icon">
                                 <ion-icon name="log-out-outline"></ion-icon>
                             </span>
                             <span class="title">Log Out</span>   
-                            </a>
-                            
                         </button>
                     </form>
                     

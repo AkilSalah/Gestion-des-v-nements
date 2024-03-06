@@ -26,6 +26,11 @@ class AdminController extends Controller
     ->get();
     return view('Admin.utilisateurAdmin', compact('utilisateurs'));
     }
+    public function eventIndex(){
+        $events = Event::where('status', 0)
+        ->get();
+        return view('Admin.events', compact('events'));
+        }
 
     public function blockAccess(Request $request, $userId)
     {
@@ -39,6 +44,18 @@ class AdminController extends Controller
 
         return redirect()->back();
     }
+
+    public function publication (Request $request , $eventId){
+        
+        $event = Event::findOrFail($eventId);
+        $event->update([
+            'status' => $request->status,
+        ]);
+
+        return redirect()->back();
+        
+    }
+
 
    
         

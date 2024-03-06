@@ -5,25 +5,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @vite(['resources/css/style.css','resources/js/main.js'])
+
 </head>
 
 <body>
-    @vite(['resources/css/style.css','resources/js/main.js'])
-
     <!-- =============== Navigation ================ -->
     <div class="container">
-        <div class="navigation ">
+        <div class="navigation">
             <ul>
                 <li>
                     <a href="">
                         <span class="icon">
                             <ion-icon name="logo-apple"></ion-icon>
                         </span>
-                        <span class="title">Evento Admin</span>
+                        <span class="title">Organisateur Evento</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('Admin') }}">
+                    <a href="{{ route('Organisateur') }}">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -32,44 +32,33 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('Admin.users') }}">
+                    <a href="{{ route('Organisateur.evenement') }}">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
-                        </span>
-                        <span class="title">utilisateurs</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{ route('Admin.categorie') }}">
-                        <span class="icon">
-                            <ion-icon name="chatbubble-outline"></ion-icon>
-                        </span>
-                        <span class="title">Catégories</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="help-outline"></ion-icon>
                         </span>
                         <span class="title">Evenements</span>
                     </a>
                 </li>
                 <li>
-                    
+                    <a href="{{ route('Admin.categorie') }}">
+                        <span class="icon">
+                            <ion-icon name="chatbubble-outline"></ion-icon>
+                        </span>
+                        <span class="title">Réservation</span>
+                    </a>
+                </li>
+                <li>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <a href="">
                         <button type="submit">
                             <a href="">
                              <span class="icon">
                                 <ion-icon name="log-out-outline"></ion-icon>
                             </span>
                             <span class="title">Log Out</span>   
+                            </a>
+                            
                         </button>
-                    </a>
                     </form>
                     
                 </li>

@@ -15,11 +15,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('organisateurId')->constrained('organisateurs');
             $table->foreignId('categoryId')->constrained('categories');
+            $table->string('image');
             $table->string('title');
             $table->string('description');
             $table->date('date');
             $table->string('lieu');
             $table->integer('nbPlaces');
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

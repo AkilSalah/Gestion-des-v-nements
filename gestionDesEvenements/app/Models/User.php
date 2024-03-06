@@ -25,6 +25,13 @@ class User extends Authenticatable
         'status',
     ];
 
+    public function organisateur(){
+        return $this->hasMany(Organisateur::class);
+    }
+    public function client(){
+        return $this->hasMany(Client::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

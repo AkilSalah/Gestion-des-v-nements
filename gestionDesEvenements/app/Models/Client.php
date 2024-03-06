@@ -11,5 +11,8 @@ class Client extends Model
     protected $fillable = [
         'idUser'
     ];
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 
 }

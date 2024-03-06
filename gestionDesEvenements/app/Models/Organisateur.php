@@ -11,4 +11,11 @@ class Organisateur extends Model
     protected $fillable = [
         'idUser'
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+    public function event(){
+        return $this->hasMany(Event::class);
+    }
 }

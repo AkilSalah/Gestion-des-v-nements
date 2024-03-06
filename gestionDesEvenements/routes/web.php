@@ -52,7 +52,7 @@ route::delete('/admin/Categories/{categorie}', [CategorieController::class, 'des
 route::post('/admin/Utilisateurs/{user}',[AdminController::class,'blockAccess'])->name('admin.access');
 route::post('/admin/Evenement/{eventId}',[AdminController::class,'publication'])->name('admin.pub');
 
-// --------------------------------------------------------%-------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------------------
 
 Route::get('/client/home', [ClientController::class, 'index'])->name('Client');
 

@@ -15,16 +15,16 @@ class EventFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->sentence,
-            'description' => $this->faker->paragraph,
-            'date' => $this->faker->date(),
-            'lieu' => $this->faker->address,
-            'nbPlaces' => $this->faker->numberBetween(10, 100),
-            'image' => $this->faker->imageUrl(),
-            'status' => $this->faker->boolean(),
-            'acceptation' => $this->faker->randomElement(['Automatique', 'Manuelle']),
-            'categoryId' => Categorie::factory()->create()->id,
-            'organisateurId' => Organisateur::factory()->create()->id,
+            // 'title' => $this->faker->sentence,
+            // 'description' => $this->faker->paragraph,
+            // 'date' => $this->faker->date(),
+            // 'lieu' => $this->faker->address,
+            // 'nbPlaces' => $this->faker->numberBetween(10, 100),
+            // 'image' => $this->faker->imageUrl(),
+            // 'status' => $this->faker->boolean(),
+            // 'acceptation' => $this->faker->randomElement(['Automatique', 'Manuelle']),
+            // 'categoryId' => Categorie::factory()->create()->id,
+            // 'organisateurId' => Organisateur::factory()->create()->id,
         ];
     }
 }

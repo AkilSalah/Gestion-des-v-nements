@@ -40,7 +40,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('Admin.categorie') }}">
+                    <a href="{{ route('Organisateur.evenement') }}">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>

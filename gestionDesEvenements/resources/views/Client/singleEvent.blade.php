@@ -13,6 +13,12 @@ Evenelment
     
     </div>
     <div class="px-4 py-20">
+        @if(session('success'))
+        <div class="bg-green-200 text-green-700 p-3 mb-3 rounded-md">{{ session('success') }}</div>
+        @endif
+        @if(session('error'))
+        <div class="bg-red-200 text-red-700 p-3 mb-3 rounded-md">{{ session('error') }}</div>
+        @endif    
       <h2 class="mb-2 text-3xl font-bold">{{$evento->title}} </h2>
       <div class="flex items-center  font-bold mt-4 text-gray-700">
         <svg class="h-6 w-6 fill-current"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm64 80v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm128 0v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H336zM64 400v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H208zm112 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z"/></svg>
@@ -33,9 +39,13 @@ Evenelment
     </div> 
 
       <p class="mb-1 mt-5 font-medium text-gray-500">{{$evento->description}}</p>
-      <div class="flex justify-center mt-20" >
-        <button class=" text-2xl  hover:shadow-blue-600/40 rounded-xl bg-gradient-to-r from-blue-700 to-blue-600 px-10 py-5 font-bold text-white transition-all hover:opacity-90 hover:shadow-lg">Réserver</button>
-    </div>
+        <form action="{{ route('Client.Reservation') }}" method="POST">
+          @csrf
+          <div class="flex justify-center mt-20" >
+            <input type="hidden" name="eventId" value="{{$evento->id}}">
+        <button type="submit" class=" text-2xl  hover:shadow-blue-600/40 rounded-xl bg-gradient-to-r from-blue-700 to-blue-600 px-10 py-5 font-bold text-white transition-all hover:opacity-90 hover:shadow-lg">Réserver</button>
+     </div>
+        </form>
     </div>
   </div>
   

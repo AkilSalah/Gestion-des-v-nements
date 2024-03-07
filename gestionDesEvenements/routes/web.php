@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\OrganisateurController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,6 +57,6 @@ route::post('/admin/Evenement/{eventId}',[AdminController::class,'publication'])
 
 Route::get('/client/home', [ClientController::class, 'index'])->name('Client');
 Route::get('/client/Evenement/{idEvent}', [ClientController::class, 'singleEvent'])->name('Client.Evenement');
-
+Route::post('/client/Reservation', [ReservationController::class, 'store'])->name('Client.Reservation');
 
 require __DIR__.'/auth.php';

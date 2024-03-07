@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
+use App\Models\Event;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
@@ -28,8 +31,33 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $userId = Auth::user()->id;
+    
+        $client = Client::where('idUser', $userId)->first();
+    
+        $eventId = $request->input('eventId');
+    
+        $thisEvent = Event::find($eventId);
+    
+        $existingReservation = Reservation::where('clinetId', $client->id)
+        ->where('eventId', $eventId)
+        ->first();
+    
+        if($client && !$existingReservation && $thisEvent && $thisEvent->nbPlaces > 0) {
+            $reservation = Reservation::create([
+                'clinetId' => $client->id,
+                'eventId' => $eventId,
+            ]);
+    
+            $thisEvent->nbPlaces = $thisEvent->nbPlaces - 1;
+            $thisEvent->save();
+    
+            return redirect()->back()->with('success', 'Votre réservation a été effectuée avec succès!');
+        } else {
+            return redirect()->back()->with('error', 'Impossible de créer la réservation. Vérifiez les disponibilités.');
+        }
     }
+    
 
     /**
      * Display the specified resource.

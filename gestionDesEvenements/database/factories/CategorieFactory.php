@@ -4,10 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Categorie>
- */
-class CategoryFactory extends Factory
+class CategorieFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +14,7 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            // 'name' => $this->faker->word,
+            'categorieName' => $this->faker->word,
         ];
     }
 }

@@ -57,6 +57,7 @@
                             </span>
                             <span class="title">Log Out</span>   
                         </button>
+                        </a>
                     </form>
                     
                 </li>

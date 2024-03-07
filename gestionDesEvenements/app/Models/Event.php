@@ -21,7 +21,7 @@ class Event extends Model
     ];
 
     public function organisateur(){
-        return $this->belongsTo(Organisateur::class);
+        return $this->belongsTo(Organisateur::class,'organisateurId');
     }
     public function categories() {
         return $this->belongsTo(Categorie::class);

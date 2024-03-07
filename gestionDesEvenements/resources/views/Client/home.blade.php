@@ -52,22 +52,28 @@ Home
 
 
     <h2 class="lg:text-5xl md:text-4xl text-3xl mt-4 font-extrabold mb-4 text-center"><span class="text-blue-600">Our </span> Events</h2>
-    
-    <div class="flex justify-between">
+    <div class=" flex justify-around">
+      <form action="{{ route('Client') }}" method="GET" >
+        @csrf
         <div class="bg-white flex gap-2">
-            <div>
-            <input type='email' placeholder='Search Something...' class="mt-6 ml-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+             <div>
+            <input type='search' name="search" placeholder='Search Something...' class="mt-6 ml-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
             </div>
             <div>
                 <button type="submit" class="px-4 py-2 mt-7 text-sm font-medium text-white bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">Search</button>
-            </div>
+            </div>           
           </div>
+        </form>
+
         <div>
-          <form class="flex gap-2" action="" method="GET">
-            <select id="countries" name="Categorie" class="mt-6 ml-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-              <option selected disabled>Sélectionnez un continent</option>
+          <form class="flex gap-2" action="{{ route('Client') }}" method="GET">
+            @csrf
+            <select id="Categorie" name="Categorie" class="mt-6 ml-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <option selected disabled>Sélectionnez une catégorie</option>
               <option value="Tout">Tout</option>
-              <option value="Afrique">Afrique</option>
+              @foreach ($categories as $categorie)
+              <option value="{{$categorie->id}}">{{$categorie->categorieName}}</option>
+              @endforeach
             </select>
             <div>
               <button type="submit" class="px-4 py-2 mt-7 text-sm font-medium text-white bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">Filtrer</button>
@@ -76,35 +82,56 @@ Home
         </div>
     </div>
       
-    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-3">
    @foreach ($clientEvents as $event)
-  <div class=" mt-7 max-w-sm bg-white shadow-lg rounded-lg overflow-hidden my-4">
+
+   <a href="{{ route('Client.Evenement', ['idEvent' => $event->id]) }}">
+    <div class="mt-10 cursor-pointer rounded overflow-hidden group">
+        <img src="https://readymadeui.com/hacks-watch.webp" alt="Blog Post 2" class="w-full h-52 object-cover" />
+        <div class="py-6">
+            <span class="text-sm block text-gray-400 mb-2">{{$event->date}} | BY MARK ADAIR</span>
+            <h3 class="text-xl font-bold text-[#333] group-hover:text-blue-500 transition-all">{{$event->title}}</h3>
+        </div>
+    </div>
+</a>
+
+   
+  
+
+{{-- ------------------------------------------------------------ --}}
+  {{-- <div class=" mt-7 max-w-sm bg-white shadow-lg rounded-lg overflow-hidden my-4">
     <img class="w-full h-56 object-cover object-center" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" alt="avatar">
    
     <div class="py-4 px-6">
         <h1 class="text-2xl font-semibold text-gray-800">{{$event->title}}</h1>
-        <p class="py-2 text-lg text-gray-700">{{$event->description}}</p>
-        <div class="flex items-center mt-4 text-gray-700">
+        <p class="py-2 text-lg text-gray-700">{{Str::substr($event->description, 0, 70) }}...</p>
+        <div class="flex justify-between" >
+          <div class="flex items-center mt-4 text-gray-700">
           <svg class="h-6 w-6 fill-current"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm64 80v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm128 0v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H336zM64 400v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H208zm112 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z"/></svg>
-            <h1 class="px-2 text-sm">patterson@example.com</h1>
+            <h1 class="px-2 text-sm">{{$event->date}}</h1>
         </div>
+        <div class="flex items-center mt-4 text-gray-700">
+          <svg class="h-6 w-6 fill-current" viewBox="0 0 512 512">
+              <path d="M239.208 343.937c-17.78 10.103-38.342 15.876-60.255 15.876-21.909 0-42.467-5.771-60.246-15.87C71.544 358.331 42.643 406 32 448h293.912c-10.639-42-39.537-89.683-86.704-104.063zM178.953 120.035c-58.479 0-105.886 47.394-105.886 105.858 0 58.464 47.407 105.857 105.886 105.857s105.886-47.394 105.886-105.857c0-58.464-47.408-105.858-105.886-105.858zm0 186.488c-33.671 0-62.445-22.513-73.997-50.523H252.95c-11.554 28.011-40.326 50.523-73.997 50.523z"/><g><path d="M322.602 384H480c-10.638-42-39.537-81.691-86.703-96.072-17.781 10.104-38.343 15.873-60.256 15.873-14.823 0-29.024-2.654-42.168-7.49-7.445 12.47-16.927 25.592-27.974 34.906C289.245 341.354 309.146 364 322.602 384zM306.545 200h100.493c-11.554 28-40.327 50.293-73.997 50.293-8.875 0-17.404-1.692-25.375-4.51a128.411 128.411 0 0 1-6.52 25.118c10.066 3.174 20.779 4.862 31.895 4.862 58.479 0 105.886-47.41 105.886-105.872 0-58.465-47.407-105.866-105.886-105.866-37.49 0-70.427 19.703-89.243 49.09C275.607 131.383 298.961 163 306.545 200z"/></g>
+          </svg>
+          <h1 class="px-2 text-sm">{{$event->nbPlaces}} seats disponible </h1>
+      </div> 
+        </div>
+       
 
         <div class="flex items-center mt-4 text-gray-700">
             <svg class="h-6 w-6 fill-current" viewBox="0 0 512 512">
                 <path d="M256 32c-88.004 0-160 70.557-160 156.801C96 306.4 256 480 256 480s160-173.6 160-291.199C416 102.557 344.004 32 256 32zm0 212.801c-31.996 0-57.144-24.645-57.144-56 0-31.357 25.147-56 57.144-56s57.144 24.643 57.144 56c0 31.355-25.148 56-57.144 56z"/>
             </svg>
-            <h1 class="px-2 text-sm">California</h1>
+            <h1 class="px-2 text-sm">{{$event->lieu}}</h1>
         </div>
         
-        <div class="flex items-center mt-4 text-gray-700">
-            <svg class="h-6 w-6 fill-current" viewBox="0 0 512 512">
-                <path d="M239.208 343.937c-17.78 10.103-38.342 15.876-60.255 15.876-21.909 0-42.467-5.771-60.246-15.87C71.544 358.331 42.643 406 32 448h293.912c-10.639-42-39.537-89.683-86.704-104.063zM178.953 120.035c-58.479 0-105.886 47.394-105.886 105.858 0 58.464 47.407 105.857 105.886 105.857s105.886-47.394 105.886-105.857c0-58.464-47.408-105.858-105.886-105.858zm0 186.488c-33.671 0-62.445-22.513-73.997-50.523H252.95c-11.554 28.011-40.326 50.523-73.997 50.523z"/><g><path d="M322.602 384H480c-10.638-42-39.537-81.691-86.703-96.072-17.781 10.104-38.343 15.873-60.256 15.873-14.823 0-29.024-2.654-42.168-7.49-7.445 12.47-16.927 25.592-27.974 34.906C289.245 341.354 309.146 364 322.602 384zM306.545 200h100.493c-11.554 28-40.327 50.293-73.997 50.293-8.875 0-17.404-1.692-25.375-4.51a128.411 128.411 0 0 1-6.52 25.118c10.066 3.174 20.779 4.862 31.895 4.862 58.479 0 105.886-47.41 105.886-105.872 0-58.465-47.407-105.866-105.886-105.866-37.49 0-70.427 19.703-89.243 49.09C275.607 131.383 298.961 163 306.545 200z"/></g>
-            </svg>
-            <h1 class="px-2 text-sm">MerakiTeam</h1>
-        </div>
+        
     </div>
-</div>
-@endforeach
+</div> --}}
 
-    
+@endforeach
+    </div>
+<div class="w-11/12 mx-auto my-8">{{ $clientEvents->links() }}</div>
+
 @endsection

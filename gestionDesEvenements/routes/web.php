@@ -55,7 +55,7 @@ route::post('/admin/Evenement/{eventId}',[AdminController::class,'publication'])
 // --------------------------------------------------------------------------------------------------------------------------------
 
 Route::get('/client/home', [ClientController::class, 'index'])->name('Client');
-
+Route::get('/client/Evenement/{idEvent}', [ClientController::class, 'singleEvent'])->name('Client.Evenement');
 
 
 require __DIR__.'/auth.php';

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('clinetId')->constrained('clients')->onDelete('cascade');
             $table->foreignId('eventId')->constrained('events')->onDelete('cascade');
             $table->date('dateReservation')->default(now());
+            $table->boolean('status');
             $table->timestamps();
         });
     }

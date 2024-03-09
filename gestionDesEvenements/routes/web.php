@@ -7,6 +7,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\OrganisateurController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ticketController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,6 +40,9 @@ Route::get('/organisateur/MesEvenements', [EventController::class, 'index'])->na
 Route::post('/organisateur/AjouterEvent', [EventController::class, 'store'])->name('add.evenement');
 Route::put('/organisateur/UpdateEvent/{event}', [EventController::class, 'update'])->name('update.evenement');
 Route::delete('/organisateur/DeleteEvent/{event}', [EventController::class, 'destroy'])->name('delete.evenement');
+Route::get('/organisateur/reservation', [OrganisateurController::class, 'acceptation'])->name('organisateur.acceptation');
+Route::put('/organisateur/accepter-reservation/{eventReservation}', [OrganisateurController::class, 'acceptReservation'])->name('organisateur.accepterReservation');
+Route::delete('/organisateur/delete-reservation/{eventReservation}', [OrganisateurController::class, 'deleteReservation'])->name('reservation.delete');
 
 // ------------------------------------------------------------------------------------------------------------------
 
@@ -58,5 +62,6 @@ route::post('/admin/Evenement/{eventId}',[AdminController::class,'publication'])
 Route::get('/client/home', [ClientController::class, 'index'])->name('Client');
 Route::get('/client/Evenement/{idEvent}', [ClientController::class, 'singleEvent'])->name('Client.Evenement');
 Route::post('/client/Reservation', [ReservationController::class, 'store'])->name('Client.Reservation');
+Route::get('/client/Ticket', [ticketController::class, 'index'])->name('Client.ticket');
 
 require __DIR__.'/auth.php';

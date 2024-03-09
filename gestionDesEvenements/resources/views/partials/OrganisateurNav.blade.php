@@ -17,7 +17,7 @@
                 <li>
                     <a href="">
                         <span class="icon">
-                            <ion-icon name="logo-apple"></ion-icon>
+                            <ion-icon name="logo-event"></ion-icon>
                         </span>
                         <span class="title">Organisateur Evento</span>
                     </a>
@@ -40,7 +40,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('Organisateur.evenement') }}">
+                    <a href="{{ route('organisateur.acceptation') }}">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>

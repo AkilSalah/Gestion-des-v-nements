@@ -17,8 +17,10 @@ class EventController extends Controller
      */
     public function index()
     {
+        $organisateur = Auth::user()->id;
+        $idOrganisateur = Organisateur::where('idUser', $organisateur)->first();
         $categories = Categorie::all();
-        $events = Event::all();
+        $events = Event::where('organisateurId', $idOrganisateur->id)->get();
         return view('Organisateur.evenements', compact('categories', 'events'));
     }
 
@@ -39,6 +41,7 @@ class EventController extends Controller
     {
         $id = Auth::user()->id;
         $idOrganisateur = Organisateur::where('idUser', $id)->first();
+        
         $validatedData = $request->validate([
             'categorie' => 'required',
             'image' => 'required',
@@ -47,11 +50,15 @@ class EventController extends Controller
             'date' => 'required',
             'lieu' => 'required',
             'nbPlaces' => 'required',
+            'acceptation' => 'required',
         ]);
 
-        $imagePath = $request->file('image')->store('public/images/events');
+      
 
+        $imagePath = $request->file('image')->store('public/images/events');
+    
         $relativeImagePath = str_replace('public/', 'storage/', $imagePath);
+
 
         Event::create([
             'organisateurId' => $idOrganisateur->id,
@@ -61,7 +68,8 @@ class EventController extends Controller
             'date' => $validatedData['date'],
             'lieu' => $validatedData['lieu'],
             'nbPlaces' => $validatedData['nbPlaces'],
-            'image' => $relativeImagePath
+            'image' => $relativeImagePath,
+            'acceptation' => $validatedData['acceptation'],
         ]);
         return redirect()->back();
     }

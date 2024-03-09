@@ -1,6 +1,6 @@
 @extends('layouts.organisateurMaster')
 @section('title')
-Dashboard
+Mes Evenements
 @endsection
 @section('main')
 <div class="overflow-x-auto mt-8 flex justify-around">
@@ -59,10 +59,18 @@ Dashboard
                         <label for="places" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombres de places</label>
                         <input type="number" name="nbPlaces" id="places" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="nombre" required="">
                     </div>
-                    <div class="col-span-2">
+                    <div class="col-span-2 sm:col-span-1 ">
                         <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
                         <input type="file" name="image" id="image" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="event image" required="">
                     </div>
+                    <div class="col-span-2 sm:col-span-1">
+                      <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type de réservation</label>
+                      <select id="category" name="acceptation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-3.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                          <option selected="">Select acceptation</option>
+                         <option value="Automatique"> Automatique </option>
+                         <option value="Manuelle"> Manuelle </option>
+                      </select>
+                  </div>
                       <div class="col-span-2">
                           <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
                           <textarea id="description" name="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write description here"></textarea>                    

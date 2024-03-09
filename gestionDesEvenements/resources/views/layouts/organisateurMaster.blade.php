@@ -8,6 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Organisateur| @yield('title')</title>
+    @vite(['resources/css/style.css','resources/js/main.js'])
+
 </head>
 <body>
     @include('partials.OrganisateurNav')

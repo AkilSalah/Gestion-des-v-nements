@@ -17,7 +17,8 @@
                 <li>
                     <a href="">
                         <span class="icon">
-                            <ion-icon name="logo-apple"></ion-icon>
+                            <ion-icon >      <a href="javascript:void(0)"><img src={{asset('/image/eventLogo-removebg-preview.png')}} alt="logo" class='w-36' />
+                            </ion-icon>
                         </span>
                         <span class="title">Evento Admin</span>
                     </a>

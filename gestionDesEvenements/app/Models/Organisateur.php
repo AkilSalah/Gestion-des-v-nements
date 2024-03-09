@@ -16,6 +16,6 @@ class Organisateur extends Model
         return $this->belongsTo(User::class, 'idUser');
     }
     public function event(){
-        return $this->hasMany(Event::class);
+        return $this->hasMany(Event::class,'id');
     }
 }

@@ -12,7 +12,7 @@ class ClientController extends Controller
     public function index(Request $request)
 {
     $categories = Categorie::all();
-    $clientEvents = Event::where('status', 1)
+    $clientEvents = Event::with('organisateur.user')->where('status', 1)
                          ->where('date', '>', now());
 
     $search = $request->input('search');

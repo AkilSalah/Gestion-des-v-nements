@@ -24,7 +24,9 @@ class CheckRole
                      return $next($request);
             }
         }
-        return redirect()->route('login')->with('error', 'Accès non autorisé');
+        return  redirect()->route('login')->with('error', 'Accès non autorisé');
+
+        
 
     }
 }

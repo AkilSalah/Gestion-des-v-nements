@@ -8,7 +8,7 @@
         <button
           class='px-4 py-2 text-sm rounded-full font-bold text-white border-2 border-[#007bff] bg-[#007bff] transition-all ease-in-out duration-300 hover:bg-transparent hover:text-[#007bff]'>Logout</button>
         </form>
-        <form method="GET" action="">
+        <form method="GET" action="{{ route('Client.ticket') }}">
           @csrf
         <button
           class='px-4 py-2 text-sm rounded-full font-bold text-white border-2 border-[#ffea00] bg-[#ff1500] transition-all ease-in-out duration-300 hover:bg-transparent hover:text-[#ff00a69c]'>Get Ticket</button>

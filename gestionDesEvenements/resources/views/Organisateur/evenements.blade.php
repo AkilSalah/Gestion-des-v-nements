@@ -13,6 +13,11 @@ Mes Evenements
   </button>  
 </div>
 </div>
+@error('date')
+    <div class="mb-5 bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded relative mt-2" role="alert">
+        {{ $message }}
+    </div>
+@enderror
       <!-- Main modal -->
   <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
       <div class="relative p-4 w-full max-w-md max-h-full">
@@ -54,7 +59,8 @@ Mes Evenements
                       <div class="col-span-2 sm:col-span-1">
                         <label for="date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date de l'evenement</label>
                         <input type="date" name="date" id="lieu" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="date" required="">
-                    </div>
+                      
+                      </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label for="places" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombres de places</label>
                         <input type="number" name="nbPlaces" id="places" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="nombre" required="">
@@ -124,7 +130,7 @@ Mes Evenements
           <td class="px-6 py-4 text-base">
             {{$event->date}}
           </td>
-          <td class="px-6 py-4">
+          <td class=" flex px-6 py-4">
             <button class="mr-4" title="Edit" data-modal-target="crud-modal-up-{{$event->id}}" data-modal-toggle="crud-modal-up-{{$event->id}}">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-blue-500 hover:fill-blue-700"
                 viewBox="0 0 348.882 348.882">
@@ -183,10 +189,18 @@ Mes Evenements
                                     <label for="places" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre de places</label>
                                     <input type="number" value="{{ $event->nbPlaces }}" name="nbPlaces_edit" id="places" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nombre" required="">
                                 </div>
-                                <div class="col-span-2">
+                                <div class="col-span-2 sm:col-span-1">
                                     <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
                                     <input type="file" name="image_edit" id="image" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="">
                                 </div>
+                                <div class="col-span-2 sm:col-span-1">
+                                  <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type de réservation</label>
+                                  <select id="category" name="acceptation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-3.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                      <option selected="">Select acceptation</option>
+                                     <option value="Automatique"> Automatique </option>
+                                     <option value="Manuelle"> Manuelle </option>
+                                  </select>
+                              </div>
                                 <div class="col-span-2">
                                     <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
                                     <textarea id="description" name="description_edit" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Écrire la description ici">{{ $event->description }}</textarea>

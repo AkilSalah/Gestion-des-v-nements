@@ -16,11 +16,8 @@
             <ul>
                 <li>
                     <a href="">
-                        <span class="icon">
-                            <ion-icon >      <a href="javascript:void(0)"><img src={{asset('/image/eventLogo-removebg-preview.png')}} alt="logo" class='w-36' />
-                            </ion-icon>
-                        </span>
-                        <span class="title">Evento Admin</span>
+                      
+                        <span class="title text-3xl font-semibold   ">Evento </span>
                     </a>
                 </li>
                 <li>
@@ -44,8 +41,9 @@
                 <li>
                     <a href="{{ route('Admin.categorie') }}">
                         <span class="icon">
-                            <ion-icon name="chatbubble-outline"></ion-icon>
+                            <ion-icon name="hardware-chip-outline"></ion-icon>
                         </span>
+                        
                         <span class="title">Catégories</span>
                     </a>
                 </li>
@@ -53,8 +51,9 @@
                 <li>
                     <a href="{{ route('Admin.events') }}">
                         <span class="icon">
-                            <ion-icon name="help-outline"></ion-icon>
+                            <ion-icon name="calendar-outline"></ion-icon>
                         </span>
+                        
                         <span class="title">Evenements</span>
                     </a>
                 </li>
@@ -88,9 +87,13 @@
                         <ion-icon name="search-outline"></ion-icon>
                     </label>
                 </div>
-                <div class="user">
-                    <img src="assets/imgs/customer01.jpg" alt="">
+                <div class="flex justify-end gap-3">
+                    <div class="user">
+                        <img src="https://cdn-icons-png.flaticon.com/512/115/115893.png" alt="">
+                    </div>
+                    <div class="my-auto" >{{ Auth::user()->name }}</div>
                 </div>
+                
             </div>
             
             @yield('main')

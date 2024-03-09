@@ -30,6 +30,7 @@ class eventRequest extends FormRequest
             'lieu_edit' =>'required',
             'nbPlaces_edit' =>'required',
             'acceptation' =>'required',
+            
         ];
         
     }

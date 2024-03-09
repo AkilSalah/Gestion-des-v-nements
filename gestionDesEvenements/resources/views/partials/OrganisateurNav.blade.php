@@ -16,10 +16,7 @@
             <ul>
                 <li>
                     <a href="">
-                        <span class="icon">
-                            <ion-icon name="logo-event"></ion-icon>
-                        </span>
-                        <span class="title">Organisateur Evento</span>
+                        <span class="title text-3xl font-semibold  ">Evento </span>
                     </a>
                 </li>
                 <li>
@@ -34,7 +31,7 @@
                 <li>
                     <a href="{{ route('Organisateur.evenement') }}">
                         <span class="icon">
-                            <ion-icon name="people-outline"></ion-icon>
+                            <ion-icon name="calendar-outline"></ion-icon>
                         </span>
                         <span class="title">Evenements</span>
                     </a>
@@ -42,8 +39,9 @@
                 <li>
                     <a href="{{ route('organisateur.acceptation') }}">
                         <span class="icon">
-                            <ion-icon name="chatbubble-outline"></ion-icon>
+                            <ion-icon name="checkmark-circle-outline"></ion-icon>
                         </span>
+                        
                         <span class="title">Réservation</span>
                     </a>
                 </li>
@@ -76,9 +74,15 @@
                         <ion-icon name="search-outline"></ion-icon>
                     </label>
                 </div>
-                <div class="user">
-                    <img src="assets/imgs/customer01.jpg" alt="">
+                <div class="flex justify-end gap-3">
+                    <div class="user">
+                        <img src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/corporate-user-icon.png" alt="">
+                    </div>
+                    <div class="my-auto" >{{ Auth::user()->name }}</div>
                 </div>
+                
+                
+               
             </div>
             
             @yield('main')

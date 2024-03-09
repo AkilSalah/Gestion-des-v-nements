@@ -38,12 +38,15 @@ class AdminController extends Controller
         $request->validate([
             'status' => 'required',
         ]);
+    
         $user->update([
             'status' => $request->status,
         ]);
-
-        return redirect()->back();
+    
+        return redirect()->back()->with('success', 'L\'accès de l\'utilisateur a été mis à jour avec succès.');
     }
+        
+    
 
     public function publication (Request $request , $eventId){
         

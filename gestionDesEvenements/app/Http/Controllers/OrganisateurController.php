@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class OrganisateurController extends Controller
 {
+   
     public function index()
     {
         $organisateur = auth::user()->id;

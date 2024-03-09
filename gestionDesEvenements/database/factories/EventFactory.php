@@ -6,6 +6,7 @@ use App\Models\Categorie;
 use App\Models\Event;
 use App\Models\Organisateur;
 use App\Models\Category;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class EventFactory extends Factory
@@ -16,7 +17,7 @@ class EventFactory extends Factory
         return [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
-            'date' => $this->faker->date(),
+            'date' => $this->faker->dateTimeBetween(Carbon::now()->addDays(1), Carbon::now()->addDays(30)),
             'lieu' => $this->faker->address,
             'nbPlaces' => $this->faker->numberBetween(10, 100),
             'image' => $this->faker->imageUrl(),

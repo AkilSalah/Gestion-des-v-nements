@@ -6,6 +6,7 @@ use App\Http\Requests\eventRequest;
 use App\Models\Categorie;
 use App\Models\Event;
 use App\Models\Organisateur;
+use App\Rules\AfterCurrentDate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Prompts\Concerns\Events;
@@ -47,13 +48,11 @@ class EventController extends Controller
             'image' => 'required',
             'title' => 'required',
             'description' => 'required',
-            'date' => 'required',
+            'date' => ['required', new AfterCurrentDate],
             'lieu' => 'required',
             'nbPlaces' => 'required',
             'acceptation' => 'required',
         ]);
-
-      
 
         $imagePath = $request->file('image')->store('public/images/events');
     
@@ -110,6 +109,7 @@ class EventController extends Controller
             'lieu'=>$validateRequest["lieu_edit"],
             'nbPlaces' => $validateRequest["nbPlaces_edit"],
             'date' => $validateRequest["date_edit"],
+            'acceptation' => $validateRequest['acceptation'],
 
         ]);
 

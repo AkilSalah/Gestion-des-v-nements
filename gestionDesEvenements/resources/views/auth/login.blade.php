@@ -1,7 +1,7 @@
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
-
+  
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
@@ -24,6 +24,9 @@
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
+        @if(session('error'))
+        <div class="mt-4 bg-red-200 text-red-700 p-3 mb-3 rounded-md">{{ session('error') }}</div>
+        @endif
         <!-- Remember Me -->
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">

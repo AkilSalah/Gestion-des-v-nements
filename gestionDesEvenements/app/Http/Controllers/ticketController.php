@@ -16,6 +16,7 @@ class ticketController extends Controller
      $reservationTicket = Reservation::with('client.user', 'event.organisateur.user')
      ->where('clinetId', $clientId->id)
      ->where('status', 1)
+     ->orderByDesc('id')
      ->get();
  
 

@@ -22,8 +22,8 @@ Dashboard
             </tr>
         </thead>
         <tbody>
+            @foreach ($mesEvenements as $eventi)
             <tr class="bg-white font-semibold dark:bg-gray-800">
-                @foreach ($mesEvenements as $eventi)
                   <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {{$eventi->title}}
                 </th>
@@ -33,9 +33,10 @@ Dashboard
                 <td class="px-6 py-4">
                     {{$eventi->reservations_count}}
                 </td>   
-                @endforeach
                
             </tr>
+            @endforeach
+
         </tbody>
        
     </table>

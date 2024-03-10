@@ -52,7 +52,7 @@ Home
 
 
     <h2 class="lg:text-5xl md:text-4xl text-3xl mt-4 font-extrabold mb-4 text-center"><span class="text-blue-600">Our </span> Events</h2>
-    <div class=" flex justify-around">
+    <div class=" flex justify-around flex-wrap">
       <form action="{{ route('Client') }}" method="GET" >
         @csrf
         <div class="bg-white flex gap-2">

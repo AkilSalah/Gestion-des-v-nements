@@ -4,17 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Categorie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class CategorieController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
-        $categories = Categorie::all();
+        $categories = Cache::remember('categories', now()->addHours(24), function () {
+            return Categorie::all();
+        });
+    
         return view('Admin.categories', compact('categories'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -35,6 +41,7 @@ class CategorieController extends Controller
         Categorie::create([
             'categorieName' => $request->categorieName,
         ]);
+        Cache::forget('categories');
         return redirect()->back();
     }
 
@@ -64,6 +71,8 @@ class CategorieController extends Controller
         ]);
        
         $categorie->update($validatedData);
+        Cache::forget('categories');
+
     
         return redirect()->back();
     }
@@ -74,6 +83,8 @@ class CategorieController extends Controller
     public function destroy(Categorie $categorie)
     {
         $categorie->delete();
+        Cache::forget('categories');
+
         return redirect()->back();
     }
 }

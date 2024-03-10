@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('nbPlaces');
             $table->boolean('status')->default(0);
             $table->enum('acceptation', ['Automatique', 'Manuelle'])->default('Automatique');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

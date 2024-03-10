@@ -23,7 +23,7 @@ class eventRequest extends FormRequest
     {
         return [
             'categorie_edit' => 'required',
-            'image_edit' => 'nullable|image', 
+            'image_edit' => 'required', 
             'title_edit' => 'required',
             'description_edit' =>'required',
             'date_edit' =>'required',

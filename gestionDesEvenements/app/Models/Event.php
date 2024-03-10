@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Event extends Model
 {
     use HasFactory;
+    use SoftDeletes;
     protected $fillable = [
         'organisateurId',
         'title',
@@ -20,6 +22,8 @@ class Event extends Model
         'status', 
         'acceptation'
     ];
+    protected $dates = ['deleted_at'];
+
 
     public function organisateur(){
         return $this->belongsTo(Organisateur::class,'organisateurId');

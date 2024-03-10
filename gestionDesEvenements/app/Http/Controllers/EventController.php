@@ -9,6 +9,7 @@ use App\Models\Organisateur;
 use App\Rules\AfterCurrentDate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Prompts\Concerns\Events;
 
 class EventController extends Controller
@@ -94,27 +95,31 @@ class EventController extends Controller
      * Update the specified resource in storage.
      */
     public function update(eventRequest $request, Event $event)
-    {
+{
+    $validateRequest = $request->validated();
 
-        $validateRequest = $request->validated();
-        if ($request->hasFile('image_edit')) {
-            $imagePath = $request->file('image_edit')->store('public/images/events');
-            $relativeImagePath = str_replace('public/', 'storage/', $imagePath);
-            $request['image_edit'] = $relativeImagePath;
-        }
+    if ($request->hasFile('image_edit')) {
+        Storage::delete($event->image);
+        $imagePath = $request->file('image_edit')->store('public/images/events');
+        $relativeImagePath = str_replace('public/', 'storage/', $imagePath);
+
         $event->update([
-            'title'=>$validateRequest["title_edit"],
-            'categoryId' => $validateRequest["categorie_edit" ],
-            'description'=>$validateRequest["description_edit"],
-            'lieu'=>$validateRequest["lieu_edit"],
-            'nbPlaces' => $validateRequest["nbPlaces_edit"],
-            'date' => $validateRequest["date_edit"],
-            'acceptation' => $validateRequest['acceptation'],
-
+            'image' => $relativeImagePath,
         ]);
-
-        return redirect()->back();
     }
+    $event->update([
+        'title' => $validateRequest["title_edit"],
+        'categoryId' => $validateRequest["categorie_edit"],
+        'description' => $validateRequest["description_edit"],
+        'lieu' => $validateRequest["lieu_edit"],
+        'nbPlaces' => $validateRequest["nbPlaces_edit"],
+        'date' => $validateRequest["date_edit"],
+        'acceptation' => $validateRequest['acceptation'],
+    ]);
+
+    return redirect()->back();
+}
+
 
 
 

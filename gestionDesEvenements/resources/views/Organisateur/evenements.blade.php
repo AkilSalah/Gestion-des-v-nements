@@ -173,14 +173,15 @@ Mes Evenements
                                     <input type="text" value="{{ $event->lieu }}" name="lieu_edit" id="lieu" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Lieu" required="">
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
-                                    <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Catégorie</label>
-                                    <select id="category" name="categorie_edit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                        <option value="" disabled>Sélectionner une catégorie</option>
-                                        @foreach ($categories as $categorie)
-                                            <option value="{{ $categorie->id }}">{{ $categorie->categorieName }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                  <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Catégorie</label>
+                                  <select id="category" name="categorie_edit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                      <option value="" disabled>Sélectionner une catégorie</option>
+                                      @foreach ($categories as $categorie)
+                                          <option value="{{ $categorie->id }}" @if($categorie->id == $event->categoryId) selected @endif>{{ $categorie->categorieName }}</option>
+                                      @endforeach
+                                  </select>
+                              </div>
+                              
                                 <div class="col-span-2 sm:col-span-1">
                                     <label for="date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date de l'evenement</label>
                                     <input type="date" value="{{ $event->date }}" name="date_edit" id="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Date" required="">
@@ -190,15 +191,23 @@ Mes Evenements
                                     <input type="number" value="{{ $event->nbPlaces }}" name="nbPlaces_edit" id="places" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nombre" required="">
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
-                                    <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
-                                    <input type="file" name="image_edit" id="image" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="">
-                                </div>
+                                  <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
+                                  @if($event->image)
+                                      <img src="{{ asset($event->image) }}" alt="Event Image" class="mb-2 max-w-full h-auto">
+                                  @else
+                                      <p class="text-gray-500">Aucune image disponible</p>
+                                  @endif
+                                  <input type="file" name="image_edit" id="image" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                              </div>
+                              
                                 <div class="col-span-2 sm:col-span-1">
-                                  <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type de réservation</label>
-                                  <select id="category" name="acceptation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-3.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                      <option selected="">Select acceptation</option>
-                                     <option value="Automatique"> Automatique </option>
-                                     <option value="Manuelle"> Manuelle </option>
+                                  <label for="acceptation" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type de réservation</label>
+                                  <select id="acceptation"   name="acceptation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-3.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                      <option value="" selected="">Select acceptation</option>
+                                     <option value="Automatique" @if ($event->acceptation==='Automatique') selected 
+                                     @endif > Automatique </option>
+                                     <option value="Manuelle" @if ($event->acceptation==='Manuelle') selected
+                                     @endif > Manuelle </option>
                                   </select>
                               </div>
                                 <div class="col-span-2">
@@ -215,7 +224,7 @@ Mes Evenements
                     </div>
                 </div>
             </div> 
-            <form action="{{ route('delete.evenement', $event) }}" method="POST">
+            <form action="{{ route('delete.evenement', $event) }}" method="POST"  >
                 @method('delete')
                 @csrf
               <button class="mr-4" title="Delete">

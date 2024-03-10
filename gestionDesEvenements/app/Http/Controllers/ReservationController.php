@@ -8,6 +8,7 @@ use App\Models\Organisateur;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class ReservationController extends Controller
 {
@@ -52,7 +53,11 @@ class ReservationController extends Controller
             $thisEvent->nbPlaces -= 1;
             $thisEvent->save();
 
+            $idOrganisateur = $thisEvent->organisateurId;
+            Cache::forget('events' . $idOrganisateur);
+
             return redirect()->back()->with('success', 'Votre réservation a été effectuée avec succès!');
+            
         } elseif ($thisEvent->acceptation === "Manuelle") {
             $reservation = Reservation::create([
                 'clinetId' => $client->id,
@@ -62,6 +67,10 @@ class ReservationController extends Controller
 
             $thisEvent->nbPlaces -= 1;
             $thisEvent->save();
+
+            $idOrganisateur = $thisEvent->organisateurId;
+            Cache::forget('events' . $idOrganisateur);
+
             return redirect()->back()->with('success', 'Votre réservation a été effectuée veuillez attendez la confirmation d\'organisateur ');
 
         }

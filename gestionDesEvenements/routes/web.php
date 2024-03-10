@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EventController;
@@ -37,6 +39,7 @@ Route::middleware('auth')->group(function () {
 
 // ------------------------------------------------------------------------------------------------------------------
 Route::group(['middleware'=>'role:Organisateur'],function(){
+   
     Route::get('/organisateur/dashboard', [OrganisateurController::class, 'index'])->name('Organisateur');
     Route::get('/organisateur/MesEvenements', [EventController::class, 'index'])->name('Organisateur.evenement');
     Route::post('/organisateur/AjouterEvent', [EventController::class, 'store'])->name('add.evenement');
@@ -52,6 +55,8 @@ Route::group(['middleware'=>'role:Organisateur'],function(){
 
 // ---------------------------------------------------------------------------------------------------------------------------------
 Route::group(['middleware' => 'role:Admin'], function(){
+    
+    
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('Admin');
     Route::get('/admin/Evenement', [AdminController::class, 'eventIndex'])->name('Admin.events');
     Route::get('/admin/Utilisateurs', [AdminController::class, 'usersIndex'])->name('Admin.users');
@@ -65,6 +70,7 @@ Route::group(['middleware' => 'role:Admin'], function(){
 
 // --------------------------------------------------------------------------------------------------------------------------------
 Route::group(['middleware' => 'role:Client'],function(){
+   
     Route::get('/client/home', [ClientController::class, 'index'])->name('Client');
     Route::get('/client/Evenement/{idEvent}', [ClientController::class, 'singleEvent'])->name('Client.Evenement');
     Route::post('/client/Reservation', [ReservationController::class, 'store'])->name('Client.Reservation');

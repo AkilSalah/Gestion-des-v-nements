@@ -71,6 +71,7 @@ class CategorieController extends Controller
         ]);
        
         $categorie->update($validatedData);
+        
         Cache::forget('categories');
 
     

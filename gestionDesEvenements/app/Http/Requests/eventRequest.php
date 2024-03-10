@@ -23,13 +23,14 @@ class eventRequest extends FormRequest
     {
         return [
             'categorie_edit' => 'required',
-            'image_edit' => 'required', 
             'title_edit' => 'required',
             'description_edit' =>'required',
             'date_edit' =>'required',
             'lieu_edit' =>'required',
             'nbPlaces_edit' =>'required',
             'acceptation' =>'required',
+            'image_edit' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+
             
         ];
         

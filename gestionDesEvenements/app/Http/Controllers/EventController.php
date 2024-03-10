@@ -72,34 +72,42 @@ class EventController extends Controller
      }
  
      public function update(eventRequest $request, Event $event)
-     {
-         $validateRequest = $request->validated();
- 
-         if ($request->hasFile('image_edit')) {
-             Storage::delete($event->image);
-             $imagePath = $request->file('image_edit')->store('public/images/events');
-             $relativeImagePath = str_replace('public/', 'storage/', $imagePath);
- 
-             $event->update([
-                 'image' => $relativeImagePath,
-             ]);
-         }
- 
-         $event->update([
-             'title' => $validateRequest["title_edit"],
-             'categoryId' => $validateRequest["categorie_edit"],
-             'description' => $validateRequest["description_edit"],
-             'lieu' => $validateRequest["lieu_edit"],
-             'nbPlaces' => $validateRequest["nbPlaces_edit"],
-             'date' => $validateRequest["date_edit"],
-             'acceptation' => $validateRequest['acceptation'],
-         ]);
- 
-         $idOrganisateur = $event->organisateurId;
-         Cache::forget('events' . $idOrganisateur);
- 
-         return redirect()->back();
-     }
+{
+    $validateRequest = $request->validated();
+
+    if ($request->hasFile('image_edit')) {
+        if ($event->image && Storage::exists($event->image)) {
+            Storage::delete($event->image);
+        }
+
+        $imagePath = $request->file('image_edit')->store('public/images/events');
+        $relativeImagePath = str_replace('public/', 'storage/', $imagePath);
+
+        $event->update([
+            'image' => $relativeImagePath,
+        ]);
+    }
+
+    elseif ($event->image) {
+        
+    }
+
+    $event->update([
+        'title' => $validateRequest["title_edit"],
+        'categoryId' => $validateRequest["categorie_edit"],
+        'description' => $validateRequest["description_edit"],
+        'lieu' => $validateRequest["lieu_edit"],
+        'nbPlaces' => $validateRequest["nbPlaces_edit"],
+        'date' => $validateRequest["date_edit"],
+        'acceptation' => $validateRequest['acceptation'],
+    ]);
+
+    $idOrganisateur = $event->organisateurId;
+    Cache::forget('events' . $idOrganisateur);
+
+    return redirect()->back()->with('success', 'Événement mis à jour avec succès.');
+}
+
  
      public function destroy(Event $event)
      {

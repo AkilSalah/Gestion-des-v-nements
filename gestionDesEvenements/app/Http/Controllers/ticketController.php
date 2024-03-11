@@ -18,8 +18,6 @@ class ticketController extends Controller
      ->where('status', 1)
      ->orderByDesc('id')
      ->get();
- 
-
 
     return view('Client.ticket',compact('reservationTicket'));
     }

@@ -33,8 +33,13 @@ class ClientController extends Controller
 
 
     public function singleEvent($idEvent){
-        $evento = Event::with('organisateur','organisateur.user')->where('id',$idEvent)->first();
+        $evento = Event::with('organisateur','organisateur.user')->where('id',$idEvent)
+        ->first();
+        if($evento->status == 1){
         return view('Client.singleEvent', compact('evento'));
+        }else{
+            return  abort('404');
+        }
     }
     
     
